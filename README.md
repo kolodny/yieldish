@@ -10,9 +10,9 @@ Generate a sync and async variant of some function. This is useful when you want
 ### Usage
 
 ```js
-const { syncAndAsync } = require('yieldish');
+const { yieldish } = require('yieldish');
 
-const adders = syncAndAsync(isSync => function *(firstNumber) {
+const adders = yieldish(isSync => function *(firstNumber) {
   const secondNumber = yield isSync ? 1 : Promise.resolve(1);
   return firstNumber + secondNumber;
 });
