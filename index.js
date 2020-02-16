@@ -1,18 +1,3 @@
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  let value, done;
-  try {
-    ({ value, done } = gen[key](arg));
-  } catch (error) {
-    reject(error);
-    return;
-  }
-  if (done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
 function createSyncAndAsyncFunction(fn) {
   const syncFn = fn(true);
   const asyncFn = fn(false);
@@ -30,13 +15,22 @@ function createSyncAndAsyncFunction(fn) {
 
     async: (...args) => new Promise(function (resolve, reject) {
       var gen = asyncFn(...args);
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      next(undefined);
+
+      function next(arg) {
+        let value, done;
+        try {
+          ({ value, done } = gen.next(arg));
+        } catch (error) {
+          reject(error);
+          return;
+        }
+        if (done) {
+          resolve(value);
+        } else {
+          Promise.resolve(value).then(next, reject);
+        }
       }
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-      _next(undefined);
     }),
 
   });
