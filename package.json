@@ -1,0 +1,23 @@
+{
+  "name": "yieldish",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "Moshe Kolodny",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kolodny/yieldish.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kolodny/yieldish/issues"
+  },
+  "homepage": "https://github.com/kolodny/yieldish#readme",
+  "description": "",
+  "devDependencies": {
+    "mocha": "^7.0.1"
+  }
+}

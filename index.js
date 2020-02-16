@@ -1,4 +1,4 @@
-function createSyncAndAsyncFunction(fn) {
+exports.yieldish = function yieldish(fn) {
   const syncFn = fn(true);
   const asyncFn = fn(false);
 
@@ -35,15 +35,3 @@ function createSyncAndAsyncFunction(fn) {
 
   });
 }
-
-debugger;
-const things = createSyncAndAsyncFunction(isSync => function *(third){
-  const firstNumber = 1;
-  const secondNumber = yield isSync ? 3 : Promise.resolve(3);
-  return firstNumber + secondNumber + third
-});
-
-(async () => {
-  console.log(things.sync(20))
-  console.log(await things.async(10))
-})();
